@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 5555
 const session = ping.createSession()
 
 app.get("/test", async (req, res) => {
-    res.json("hey")
+    res.send("hey")
 })
 
 // Define a route to handle ping requests
