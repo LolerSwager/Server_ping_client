@@ -2,10 +2,10 @@
     "name": "ping-app",
     "version": "1.0.0",
     "description": "A simple Node.js application to ping clients and send ping status in JSON format.",
-    "main": "app.js",
+    "main": "index.js",
     "type": "module",
     "scripts": {
-        "start": "vercel dev"
+        "start": "node index.js"
     },
     "dependencies": {
         "express": "^4.17.2",
