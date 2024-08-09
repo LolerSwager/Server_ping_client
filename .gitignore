@@ -1,1 +1,28 @@
-.vercel
+# Node modules
+node_modules/
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+
+# Vercel configuration
+.vercel/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Build output
+dist/
+build/
+
+# Optional: ignore IDE/editor-specific files
+.vscode/
+.idea/
+
+# NPM package-lock or yarn lock files
+package-lock.json
+yarn.lock
