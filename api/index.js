@@ -8,6 +8,10 @@ const PORT = process.env.PORT || 5555
 // Create a new ping session
 const session = ping.createSession()
 
+app.get("/test", async (req, res) => {
+    res.json("hey")
+})
+
 // Define a route to handle ping requests
 app.get("/", async (req, res) => {
     try {
