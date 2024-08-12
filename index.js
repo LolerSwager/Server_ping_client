@@ -11,7 +11,6 @@ const session = ping.createSession({
     timeout: 1000, // Timeout of 1 second
 })
 
-
 app.get("/alive", async (req, res) => {
     res.send("im alive")
 })
@@ -75,8 +74,8 @@ app.get("/", async (req, res) => {
 })
 
 // Start the server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`)
 })
 
-server.timeout = 300000; // Set timeout to 5 minutes
+server.timeout = 300000 // Set timeout to 5 minutes
