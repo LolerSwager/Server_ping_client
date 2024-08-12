@@ -8,8 +8,8 @@ const PORT = process.env.PORT || 5555
 // Create a new ping session
 const session = ping.createSession()
 
-app.get("/test", async (req, res) => {
-    res.send("hey")
+app.get("/alive", async (req, res) => {
+    res.send("im alive")
 })
 
 // Define a route to handle ping requests
@@ -21,16 +21,15 @@ app.get("/", async (req, res) => {
         } = req
 
         // Use the 'forwardedFor' value if it exists, otherwise use the 'remoteAddress' value.
-        const clientIpAddress = forwardedFor || remoteAddress
+        let clientIpAddress = forwardedFor || remoteAddress
 
         if (!clientIpAddress) {
             return res.status(400).json({ error: 'Missing IP address in query parameter "ip"' })
         }
 
-        // Validate the IP address format
-        const isValidIp = /^(\d{1,3}\.){3}\d{1,3}$|^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$/.test(clientIpAddress)
-        if (!isValidIp) {
-            return res.status(400).json({ error: "Invalid IP address format" })
+        // If the address is in the IPv6-mapped IPv4 format, extract the IPv4 part
+        if (clientIpAddress.startsWith("::ffff:")) {
+            clientIpAddress = clientIpAddress.split(":").pop()
         }
 
         // Prepare a promise-based ping request
@@ -53,11 +52,11 @@ app.get("/", async (req, res) => {
             ip: clientIpAddress,
             host: pingResult.target,
             alive: true,
-            time: pingResult.ms,
+            ping: pingResult.ms,
             status: `Client is reachable (ms=${pingResult.ms})`,
         }
 
-        console.log(chalk.bgYellow(`${clientIpAddress} connected with ${pingResult.ms} ms`))
+        console.log(`${clientIpAddress} connected with ${pingResult.ms} ms`)
 
         // Send JSON response
         res.json(response)

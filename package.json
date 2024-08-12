@@ -9,6 +9,8 @@
     },
     "dependencies": {
         "express": "^4.19.2",
-        "net-ping": "^1.2.4"
+        "net-ping": "^1.2.4",
+        "nodemon": "^3.1.4",
+        "raw-socket": "^1.8.1"
     }
 }
