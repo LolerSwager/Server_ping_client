@@ -6,10 +6,18 @@ const app = express()
 const PORT = process.env.PORT || 5555
 
 // Create a new ping session
-const session = ping.createSession()
+const session = ping.createSession({
+    retries: 1, // Only one retry
+    timeout: 1000, // Timeout of 1 second
+})
+
 
 app.get("/alive", async (req, res) => {
     res.send("im alive")
+})
+
+app.get("/gui", async (req, res) => {
+    res.send("ebola")
 })
 
 // Define a route to handle ping requests
@@ -70,3 +78,5 @@ app.get("/", async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`)
 })
+
+server.timeout = 300000; // Set timeout to 5 minutes
